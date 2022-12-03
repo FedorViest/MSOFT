@@ -7,6 +7,23 @@ import datetime
 from abc import ABC, abstractmethod
 
 
+def parse_data():
+    route_data = []
+    with open("route_data.txt", "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            route_data.append(line.strip())
+    temp = []
+    final = []
+    for data in route_data:
+        if data == "":
+            final.append(temp)
+            temp = []
+        else:
+            temp.append(data)
+    return final
+
+
 class Booking(ABC):
 
     @abstractmethod
@@ -23,7 +40,7 @@ class Weather:
 
 
 class Location:
-    def __init__(self, latitude: str, longitude:str, time_zone: str, country: str):
+    def __init__(self, latitude: str, longitude: str, time_zone: str, country: str):
         self.latitude = latitude
         self.longitude = longitude
         self.time_zone = time_zone
@@ -76,7 +93,8 @@ class Accomodation(Stop, Booking):
 
 
 class Route:
-    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list, weather: Weather, rating: Rating):
+    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list,
+                 weather: Weather, rating: Rating):
         self.start = start
         self.end = end
         self.length = length
@@ -111,7 +129,8 @@ class Route:
 
 
 class SavedRoute(Route):
-    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list, weather: Weather, rating: Rating, date: datetime):
+    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list,
+                 weather: Weather, rating: Rating, date: datetime):
         super().__init__(start, end, length, severity, activities, stops, weather, rating)
         self.date = date
 
@@ -127,26 +146,47 @@ class User:
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
 
-        def register(self):
-            pass
+    def register(self):
+        pass
 
-        def login(self):
-            pass
+    def login(self):
+        pass
 
-        def create_group(self):
-            return Group()
+    def create_group(self):
+        return Group()
 
-        def share_route(saved_route: SavedRoute):
-            pass
+    def share_route(saved_route: SavedRoute):
+        pass
 
-        def create_route(self):
-            return Route()
+    def create_route(self):
+        route_details = parse_data()
 
-        def edit_profile(self):
-            return User()
+        activities = route_details[0]
+        severity = int(route_details[1][0])
+        travelling_as = route_details[2][0]
+        sleeping = route_details[2][1]
+        start_location = route_details[3][0]
+        end_location = route_details[3][1]
+        date = route_details[4][0]
 
-        def delete_account(self):
-            pass
+        print(activities, severity, travelling_as, sleeping, start_location, end_location, date)
+
+        if len(activities) > 5:
+            return False
+
+        print(route_details)
+
+        #return Route()
+
+    def edit_profile(self):
+        return User()
+
+    def delete_account(self):
+        pass
+
+user = User("John John", "john@gmail.com", "123456", 20, 5, None)
+user.create_route()
+
 
 
 class RouteAuthor(User):

@@ -1,0 +1,14 @@
+bike
+run
+walk
+
+5
+
+Alone
+Hotel
+
+pica
+kokot
+
+15/12/2022
+
