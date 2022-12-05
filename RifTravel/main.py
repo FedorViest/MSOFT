@@ -4,7 +4,12 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import datetime
+import random
 from abc import ABC, abstractmethod
+from Route_confirmation import Ui_RouteRecap
+from unable_window import Ui_UnableWindow
+
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 def parse_data():
@@ -94,7 +99,7 @@ class Accomodation(Stop, Booking):
 
 class Route:
     def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list,
-                 weather: Weather, rating: Rating):
+                 weather: Weather = None, rating: Rating = None):
         self.start = start
         self.end = end
         self.length = length
@@ -104,8 +109,14 @@ class Route:
         self.weather = weather
         self.rating = rating
 
-    def save_route(self):
-        return Route
+    def save_route(self, route):
+        saved_route = SavedRoute(route.start, route.end, route.length, route.severity, route.activities, route.stops,
+                          route.weather, route.rating, datetime.date.today())
+        import utils
+        utils.my_routes.append(saved_route)
+        print("MY ROUTES", utils.my_routes)
+
+        return saved_route
 
     def add_activities(self, activity: Activity):
         self.activities.append(activity)
@@ -152,31 +163,52 @@ class User:
     def login(self):
         pass
 
-    def create_group(self):
-        return Group()
+    def create_group(self, info):
+        print("INFO:", info)
 
-    def share_route(saved_route: SavedRoute):
+    def share_route(self, saved_route: SavedRoute):
         pass
 
     def create_route(self):
         route_details = parse_data()
 
-        activities = route_details[0]
-        severity = int(route_details[1][0])
-        travelling_as = route_details[2][0]
-        sleeping = route_details[2][1]
-        start_location = route_details[3][0]
-        end_location = route_details[3][1]
-        date = route_details[4][0]
+        if len(route_details) > 1:
 
-        print(activities, severity, travelling_as, sleeping, start_location, end_location, date)
+            activities = route_details[0]
+            severity = int(route_details[1][0])
+            travelling_as = route_details[2][0]
+            sleeping = [route_details[2][1]]
+            start_location = route_details[3][0]
+            end_location = route_details[3][1]
+            date = route_details[4][0]
 
-        if len(activities) > 5:
-            return False
+            print(activities, severity, travelling_as, sleeping, start_location, end_location, date)
 
-        print(route_details)
+            if start_location == end_location:
+                print("Unable to create route")
+                self.window = QtWidgets.QMainWindow()
+                self.ui = Ui_UnableWindow()
+                self.ui.setupUi(self.window)
+                self.window.show()
 
-        #return Route()
+            else:
+                print("Route created")
+                try:
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Ui_RouteRecap()
+                    self.ui.setupUi(self.window)
+                    self.window.show()
+                except Exception as e:
+                    print(e)
+                route = Route(start_location, end_location, random.randrange(10, 100), severity, activities, list(sleeping), None, None)
+                print("ROUTE CREATED", route.start, route.end, route.length, route.severity, route.activities,
+                      route.stops, route.weather, route.rating)
+                saved_route = route.save_route(route)
+                print("SAVED ROUTE CREATED", saved_route.start, saved_route.end, saved_route.length, saved_route.severity,
+                        saved_route.activities, saved_route.stops, saved_route.weather, saved_route.rating, saved_route.date)
+
+        return saved_route
+
 
     def edit_profile(self):
         return User()
@@ -185,7 +217,7 @@ class User:
         pass
 
 user = User("John John", "john@gmail.com", "123456", 20, 5, None)
-user.create_route()
+# user.create_route()
 
 
 

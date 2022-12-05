@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from main import *
 
 
 class Ui_MainWindow(object):

@@ -27,19 +27,19 @@ class Ui_CreateRouteWindow(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-    def show_dialog(self):
+    def show_dialog(self, info):
         self.dialog = QtWidgets.QDialog()
         self.ui = Ui_RouteRecap()
-        self.ui.setupUi(self.dialog)
+        self.ui.setupUi(self.dialog, info)
         self.dialog.show()
 
     def get_data(self):
         route_data = [self.checkbox_data(), self.slider_data(), self.radio_data(), self.combo_data(), self.date_data()]
+        print("ROUTE", route_data)
         #create json file with route data
 
         print(route_data)
         with open("route_data.txt", "w") as f:
-            f.write("START\n")
             for item in route_data:
                 for i in item:
                     f.write(str(i) + "\n")
@@ -49,6 +49,8 @@ class Ui_CreateRouteWindow(object):
     def checkbox_data(self):
         selected_activities = []
         for i in range(len(checkboxes)):
+            print("checkboxes[i]: ", checkboxes[i].isChecked())
+        for i in range(len(utils.activities)):
             if checkboxes[i].isChecked():
                 selected_activities.append(utils.activities[i])
         return selected_activities
@@ -60,15 +62,15 @@ class Ui_CreateRouteWindow(object):
 
     #get data from radio buttons
     def radio_data(self):
-        radio_data = []
+        radio_data = ["Not stated", "Not stated"]
         if self.radioButton.isChecked():
-            radio_data.append(self.radioButton.text())
+            radio_data[0] = self.radioButton.text()
         if self.radioButton_2.isChecked():
-            radio_data.append(self.radioButton_2.text())
+            radio_data[0] = self.radioButton_2.text()
         if self.radioButton_3.isChecked():
-            radio_data.append(self.radioButton_3.text())
+            radio_data[1] = self.radioButton_3.text()
         if self.radioButton_4.isChecked():
-            radio_data.append(self.radioButton_4.text())
+            radio_data[1] = self.radioButton_4.text()
         return radio_data
 
     #get data from combo boxes
@@ -131,10 +133,12 @@ class Ui_CreateRouteWindow(object):
         self.create_route_btn.clicked.connect(self.get_data)
         # show dialog window on click and pass summary data
 
-        self.create_route_btn.clicked.connect(self.show_dialog)
+        #self.create_route_btn.clicked.connect(lambda: self.show_dialog(self.get_data()))
         self.create_route_btn.clicked.connect(CreateRouteWindow.close)
 
         self.create_route_btn.clicked.connect(utils.user.create_route)
+
+        self.create_route_btn.clicked.connect(lambda: utils.user.create_group(self.get_data()))
 
         self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_5.setGeometry(QtCore.QRect(390, 140, 151, 31))
@@ -251,14 +255,12 @@ class Ui_CreateRouteWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
 
+        checkboxes.clear()
+
         for i in range(len(utils.activities)):
-            self.checkBox = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
-            self.checkBox.setText(utils.activities[i])
-            self.checkBox.setGeometry(QtCore.QRect(30, 280 + (i * 30), 151, 22))
-            self.checkBox.setObjectName("activity_checkBox_{}".format(i))
-            self.checkBox.stateChanged.connect(self.activities_checkbox)
-            checkboxes.append(self.checkBox)
-            self.verticalLayout.addWidget(self.checkBox)
+            checkboxes.append(QtWidgets.QCheckBox(self.scrollAreaWidgetContents))
+            checkboxes[i].setText(utils.activities[i])
+            self.verticalLayout.addWidget(checkboxes[i])
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 

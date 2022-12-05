@@ -1,14 +1,11 @@
-bike
-run
-walk
 
 5
 
-Alone
-Hotel
+Not stated
+Not stated
 
-pica
-kokot
+Select start location
+Select end location
 
 15/12/2022
 
