@@ -71,13 +71,18 @@ class Rating:
 
 
 class Activity(Booking):
-    def __init__(self, min_age: int, type: str, price: int, rating: Rating):
+    def __init__(self, min_age: int, type: str, price: int):
         self.min_age = min_age
         self.type = type
         self.price = price
-        self.rating = rating
 
     def book(self):
+        pass
+
+    def add_activities(self):
+        return Route
+
+    def remove_activity(self):
         pass
 
 
@@ -86,6 +91,12 @@ class Stop:
         self.rating = rating
         self.type = type
         self.price = price
+
+    def add_stops(self):
+        return Route
+
+    def remove_stop(self):
+        pass
 
 
 class Accomodation(Stop, Booking):
@@ -98,8 +109,7 @@ class Accomodation(Stop, Booking):
 
 
 class Route:
-    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list,
-                 weather: Weather = None, rating: Rating = None):
+    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list, weather: Weather = None):
         self.start = start
         self.end = end
         self.length = length
@@ -107,66 +117,17 @@ class Route:
         self.activities = activities
         self.stops = stops
         self.weather = weather
-        self.rating = rating
 
     def save_route(self, route):
         saved_route = SavedRoute(route.start, route.end, route.length, route.severity, route.activities, route.stops,
-                          route.weather, route.rating, datetime.date.today())
+                          route.weather, datetime.date.today())
         import utils
         utils.my_routes.append(saved_route)
         print("MY ROUTES", utils.my_routes)
 
         return saved_route
 
-    def add_activities(self, activity: Activity):
-        self.activities.append(activity)
-        return Route
-
-    def add_stops(self, stop: Stop):
-        self.stops.append(stop)
-        return Route
-
-    def edit_route(self):
-        return Route
-
-    def download_route(self):
-        return Route
-
-    def delete_route(self):
-        pass
-
-    def accept_route(self):
-        pass
-
-
-class SavedRoute(Route):
-    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list,
-                 weather: Weather, rating: Rating, date: datetime):
-        super().__init__(start, end, length, severity, activities, stops, weather, rating)
-        self.date = date
-
-
-class User:
-    def __init__(self, name: str, email: str, password: str, age: int, rating: int, friends):
-        self.name = name
-        self.email = email
-        self.password = password
-        self.age = age
-        self.rating = rating
-        self.friends = friends
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
-
-    def register(self):
-        pass
-
-    def login(self):
-        pass
-
-    def create_group(self, info):
-        print("INFO:", info)
-
-    def share_route(self, saved_route: SavedRoute):
+    def share_route(self, saved_route):
         pass
 
     def create_route(self):
@@ -186,29 +147,68 @@ class User:
 
             if start_location == end_location:
                 print("Unable to create route")
-                self.window = QtWidgets.QMainWindow()
-                self.ui = Ui_UnableWindow()
-                self.ui.setupUi(self.window)
-                self.window.show()
+                try:
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Ui_UnableWindow()
+                    self.ui.setupUi(self.window)
+                    self.window.show()
+                except Exception as e:
+                    print(e)
 
             else:
                 print("Route created")
                 try:
+                    # display Ui_RouteRecap window
+
                     self.window = QtWidgets.QMainWindow()
                     self.ui = Ui_RouteRecap()
                     self.ui.setupUi(self.window)
                     self.window.show()
                 except Exception as e:
                     print(e)
-                route = Route(start_location, end_location, random.randrange(10, 100), severity, activities, list(sleeping), None, None)
+                route = Route(start_location, end_location, random.randrange(10, 100), severity, activities, list(sleeping), None)
                 print("ROUTE CREATED", route.start, route.end, route.length, route.severity, route.activities,
-                      route.stops, route.weather, route.rating)
+                      route.stops, route.weather)
                 saved_route = route.save_route(route)
                 print("SAVED ROUTE CREATED", saved_route.start, saved_route.end, saved_route.length, saved_route.severity,
-                        saved_route.activities, saved_route.stops, saved_route.weather, saved_route.rating, saved_route.date)
+                        saved_route.activities, saved_route.stops, saved_route.weather, saved_route.date)
 
-        return saved_route
+                return saved_route
 
+        return None
+
+    def edit_route(self):
+        return Route
+
+    def download_route(self):
+        return Route
+
+    def delete_route(self):
+        pass
+
+    def accept_route(self):
+        pass
+
+
+class SavedRoute(Route):
+    def __init__(self, start: str, end: str, length: int, severity: int, activities: list, stops: list,
+                 weather: Weather, date: datetime):
+        super().__init__(start, end, length, severity, activities, stops, weather)
+        self.date = date
+
+
+class User:
+    def __init__(self, name: str, email: str, password: str, age: int):
+        self.name = name
+        self.email = email
+        self.password = password
+        self.age = age
+
+    def register(self):
+        pass
+
+    def login(self):
+        pass
 
     def edit_profile(self):
         return User()
@@ -216,14 +216,14 @@ class User:
     def delete_account(self):
         pass
 
-user = User("John John", "john@gmail.com", "123456", 20, 5, None)
+# user = User("John John", "john@gmail.com", "123456", 20, 5, None)
 # user.create_route()
 
 
 
 class RouteAuthor(User):
     def __init__(self, name: str, email: str, password: str, age: int, rating: int, friends, shared_route_counter: int):
-        super().__init__(name, email, password, age, rating, friends)
+        super().__init__(name, email, password, age)
         self.shared_route_coutner = shared_route_counter
 
     def remove_shared_route(self, route: Route):
@@ -240,6 +240,9 @@ class Group:
         pass
 
     def remove_user(self, user: User):
+        pass
+
+    def create_group(self):
         pass
 
 

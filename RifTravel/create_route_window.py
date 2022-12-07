@@ -136,9 +136,9 @@ class Ui_CreateRouteWindow(object):
         #self.create_route_btn.clicked.connect(lambda: self.show_dialog(self.get_data()))
         self.create_route_btn.clicked.connect(CreateRouteWindow.close)
 
-        self.create_route_btn.clicked.connect(utils.user.create_route)
+        self.create_route_btn.clicked.connect(utils.route.create_route)
 
-        self.create_route_btn.clicked.connect(lambda: utils.user.create_group(self.get_data()))
+        #self.create_route_btn.clicked.connect(lambda: utils.user.create_group(self.get_data()))
 
         self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_5.setGeometry(QtCore.QRect(390, 140, 151, 31))
