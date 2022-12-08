@@ -25,7 +25,7 @@ class Ui_UnableWindow(object):
         UnableWindow.setObjectName("UnableWindow")
         UnableWindow.resize(553, 191)
         self.textBrowser = QtWidgets.QTextBrowser(UnableWindow)
-        self.textBrowser.setGeometry(QtCore.QRect(130, 10, 321, 91))
+        self.textBrowser.setGeometry(QtCore.QRect(70, 10, 400, 91))
         self.textBrowser.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser.setObjectName("textBrowser")

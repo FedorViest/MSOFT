@@ -10,11 +10,16 @@ end_location_list = ["Select end location", "kokot", "pica", "u", "holica", "jur
 user = User("John John", "john@gmail.com", "123456", 20)
 route = Route("start", "end", 10, 5, None, None, None)
 
-# route_1 = SavedRoute("start", "end", 10, 5, ["bike", "run", "walk"], ["campsite 1", "campsite 2"], None, datetime.datetime.now())
-
 route_1 = SavedRoute("London", "Paris", 20, 3, ["bike", "run", "walk"], ["campsite 1", "campsite 2"], None, datetime.datetime.now())
 route_2 = SavedRoute("London", "Paris", 50, 8, ["ski", "swim", "walk"], ["hotel 1", "hotel 2"], None, datetime.datetime.now())
 my_routes = [route_1, route_2]
+
+
+shared_route_1 = Route("London", "Paris", 20, 3, ["bike", "run", "walk"], ["campsite 1", "campsite 2"], None)
+shared_route_2 = Route("London", "Paris", 50, 8, ["ski", "swim", "walk"], ["hotel 1", "hotel 2"], None)
+
+shared_routes = [shared_route_1, shared_route_2]
+
 
 def combobox_start(self):
     self.start_location_combo = QtWidgets.QComboBox(self.centralwidget)

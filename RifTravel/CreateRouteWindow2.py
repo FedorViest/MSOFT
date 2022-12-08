@@ -18,7 +18,7 @@ class Ui_CreateRouteWindow(object):
         self.centralwidget = QtWidgets.QWidget(CreateRouteWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(270, 20, 256, 51))
+        self.textBrowser.setGeometry(QtCore.QRect(220, 20, 351, 51))
         self.textBrowser.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser.setObjectName("textBrowser")
         self.severity_level = QtWidgets.QSlider(self.centralwidget)
@@ -32,20 +32,23 @@ class Ui_CreateRouteWindow(object):
         self.severity_level.setTickInterval(1)
         self.severity_level.setObjectName("severity_level")
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(30, 140, 131, 31))
+        self.textBrowser_2.setGeometry(QtCore.QRect(10, 140, 181, 31))
         self.textBrowser_2.setAutoFillBackground(True)
         self.textBrowser_2.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser_2.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.textBrowser_3 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_3.setGeometry(QtCore.QRect(30, 180, 121, 31))
+        self.textBrowser_3.setGeometry(QtCore.QRect(10, 180, 161, 31))
         self.textBrowser_3.setAutoFillBackground(True)
         self.textBrowser_3.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser_3.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.textBrowser_3.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_3.setObjectName("textBrowser_3")
         self.textBrowser_4 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_4.setGeometry(QtCore.QRect(430, 190, 151, 31))
+        self.textBrowser_4.setGeometry(QtCore.QRect(430, 190, 171, 31))
         self.textBrowser_4.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.textBrowser_4.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_4.setObjectName("textBrowser_4")
         self.start_location_combo = QtWidgets.QComboBox(self.centralwidget)
         self.start_location_combo.setGeometry(QtCore.QRect(190, 140, 151, 31))
@@ -66,16 +69,18 @@ class Ui_CreateRouteWindow(object):
         self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_5.setGeometry(QtCore.QRect(390, 140, 151, 31))
         self.textBrowser_5.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.textBrowser_5.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_5.setObjectName("textBrowser_5")
         self.dateEdit = QtWidgets.QDateEdit(self.centralwidget)
         self.dateEdit.setGeometry(QtCore.QRect(470, 140, 141, 31))
         self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(2022, 12, 15), QtCore.QTime(0, 0, 0)))
         self.dateEdit.setObjectName("dateEdit")
         self.textBrowser_6 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_6.setGeometry(QtCore.QRect(30, 240, 121, 31))
+        self.textBrowser_6.setGeometry(QtCore.QRect(30, 240, 141, 31))
         self.textBrowser_6.setAutoFillBackground(True)
         self.textBrowser_6.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser_6.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.textBrowser_6.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_6.setObjectName("textBrowser_6")
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
         self.scrollArea.setGeometry(QtCore.QRect(30, 290, 140, 100))
@@ -90,7 +95,7 @@ class Ui_CreateRouteWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 121, 186))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 148, 225))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -188,10 +193,11 @@ class Ui_CreateRouteWindow(object):
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
         self.textBrowser_7 = QtWidgets.QTextBrowser(self.groupBox_3)
-        self.textBrowser_7.setGeometry(QtCore.QRect(10, 20, 151, 31))
+        self.textBrowser_7.setGeometry(QtCore.QRect(10, 20, 181, 31))
         self.textBrowser_7.setAutoFillBackground(True)
         self.textBrowser_7.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser_7.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.textBrowser_7.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_7.setObjectName("textBrowser_7")
         self.Backbtn = QtWidgets.QPushButton(self.centralwidget)
         self.Backbtn.setGeometry(QtCore.QRect(20, 490, 241, 61))
@@ -206,7 +212,7 @@ class Ui_CreateRouteWindow(object):
         self.statusbar.setObjectName("statusbar")
         CreateRouteWindow.setStatusBar(self.statusbar)
         self.menubar = QtWidgets.QMenuBar(CreateRouteWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
         CreateRouteWindow.setMenuBar(self.menubar)
 
@@ -219,33 +225,33 @@ class Ui_CreateRouteWindow(object):
         self.textBrowser.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600;\">Create Route</span></p></body></html>"))
         self.textBrowser_2.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Start location:</span></p></body></html>"))
         self.textBrowser_3.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">End location:</span></p></body></html>"))
         self.textBrowser_4.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Route severity:</span></p></body></html>"))
         self.pushButton.setText(_translate("CreateRouteWindow", "Create route"))
         self.textBrowser_5.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Date:</span></p></body></html>"))
         self.textBrowser_6.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Activities:</span></p></body></html>"))
         self.checkBox.setText(_translate("CreateRouteWindow", "CheckBox"))
         self.checkBox_2.setText(_translate("CreateRouteWindow", "CheckBox"))
@@ -260,7 +266,7 @@ class Ui_CreateRouteWindow(object):
         self.textBrowser_7.setHtml(_translate("CreateRouteWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Travel options:</span></p></body></html>"))
         self.Backbtn.setText(_translate("CreateRouteWindow", "Back"))
 

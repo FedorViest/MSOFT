@@ -6,6 +6,8 @@
 import datetime
 import random
 from abc import ABC, abstractmethod
+
+import utils
 from Route_confirmation import Ui_RouteRecap
 from unable_window import Ui_UnableWindow
 
@@ -128,7 +130,8 @@ class Route:
         return saved_route
 
     def share_route(self, saved_route):
-        pass
+        utils.shared_routes.append(saved_route)
+        print("SHARED ROUTES", utils.shared_routes)
 
     def create_route(self):
         route_details = parse_data()

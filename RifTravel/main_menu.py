@@ -23,6 +23,16 @@ class Ui_MainWindow(object):
         except Exception as e:
             print(e)
 
+    def open_my_routes(self):
+        try:
+            from my_routes_window import Ui_MyRoutesWindow
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_MyRoutesWindow()
+            self.ui.setupUi(self.window)
+            self.window.show()
+        except Exception as e:
+            print(e)
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -44,6 +54,10 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.myRoutesbtn.setFont(font)
         self.myRoutesbtn.setObjectName("myRoutesbtn")
+
+        self.myRoutesbtn.clicked.connect(self.open_my_routes)
+        self.myRoutesbtn.clicked.connect(MainWindow.close)
+
         self.createRoutebtn = QtWidgets.QPushButton(self.centralwidget)
         self.createRoutebtn.setGeometry(QtCore.QRect(220, 90, 371, 71))
         font = QtGui.QFont()

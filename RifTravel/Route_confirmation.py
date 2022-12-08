@@ -45,7 +45,7 @@ class Ui_RouteRecap(object):
         self.Confirmbtn.clicked.connect(RouteRecap.close)
 
         self.textBrowser_2 = QtWidgets.QTextBrowser(RouteRecap)
-        self.textBrowser_2.setGeometry(QtCore.QRect(240, 10, 161, 41))
+        self.textBrowser_2.setGeometry(QtCore.QRect(200, 10, 250, 41))
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.textBrowser_2.setObjectName("textBrowser_2")
