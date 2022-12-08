@@ -33,19 +33,33 @@ class Ui_MainWindow(object):
         except Exception as e:
             print(e)
 
+    def open_shared_routes(self):
+        try:
+            from shared_routes_window import Ui_SharedRoutesWindow
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_SharedRoutesWindow()
+            self.ui.setupUi(self.window)
+            self.window.show()
+        except Exception as e:
+            print(e)
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.editProfilebtn = QtWidgets.QPushButton(self.centralwidget)
-        self.editProfilebtn.setGeometry(QtCore.QRect(220, 290, 371, 71))
+        self.sharedroutesbtn = QtWidgets.QPushButton(self.centralwidget)
+        self.sharedroutesbtn.setGeometry(QtCore.QRect(220, 290, 371, 71))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
         font.setWeight(75)
-        self.editProfilebtn.setFont(font)
-        self.editProfilebtn.setObjectName("editProfilebtn")
+        self.sharedroutesbtn.setFont(font)
+        self.sharedroutesbtn.setObjectName("sharedroutesbtn")
+
+        self.sharedroutesbtn.clicked.connect(self.open_shared_routes)
+        self.sharedroutesbtn.clicked.connect(MainWindow.close)
+
         self.myRoutesbtn = QtWidgets.QPushButton(self.centralwidget)
         self.myRoutesbtn.setGeometry(QtCore.QRect(220, 190, 371, 71))
         font = QtGui.QFont()
@@ -85,7 +99,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.editProfilebtn.setText(_translate("MainWindow", "Edit Profile"))
+        self.sharedroutesbtn.setText(_translate("MainWindow", "Shared Routes"))
         self.myRoutesbtn.setText(_translate("MainWindow", "My Routes"))
         self.createRoutebtn.setText(_translate("MainWindow", "Create Route"))
 
