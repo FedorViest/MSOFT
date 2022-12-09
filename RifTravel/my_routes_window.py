@@ -28,7 +28,7 @@ class Ui_MyRoutesWindow(QMainWindow):
 
     def share_route(self):
         sender = self.sender()
-        index = int(sender.objectName()[-1])
+        index = int(sender.objectName().split("_")[1])
         utils.route.share_route(utils.my_routes[index])
 
     def back(self):
@@ -98,8 +98,6 @@ class Ui_MyRoutesWindow(QMainWindow):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
 
-        buttons = []
-
         for i in range(len(utils.my_routes)):
             self.route_info = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
             self.route_info.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -110,7 +108,6 @@ class Ui_MyRoutesWindow(QMainWindow):
             "\nLength: " + str(utils.my_routes[i].length) + "\t\tSeverity: " + str(utils.my_routes[i].severity) + \
                 "\nDate created: " + str(utils.my_routes[i].date) + "\t\tWeather: " + \
                      "sunny" if utils.my_routes[i].weather is None else "Sunny"
-            print(string)
             self.route_info.setText(string)
             self.sharebtn = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
             self.delbtn = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
@@ -120,16 +117,12 @@ class Ui_MyRoutesWindow(QMainWindow):
             font.setWeight(75)
             self.sharebtn.setFont(font)
             self.delbtn.setFont(font)
-            self.sharebtn.setObjectName("sharebtn{i}".format(i=i))
+            self.sharebtn.setObjectName("sharebtn_{i}".format(i=i))
             self.delbtn.setObjectName("delbtn{i}".format(i=i))
             self.sharebtn.setText("Share route {i}".format(i=i+1))
             self.delbtn.setText("Delete route {i}".format(i=i+1))
             self.verticalLayout.addWidget(self.sharebtn)
             self.verticalLayout.addWidget(self.delbtn)
-            print(self.sharebtn.objectName())
-
-            buttons.append(self.sharebtn)
-
 
             for j in range(len(utils.shared_routes)):
                 if utils.my_routes[i].start == utils.shared_routes[j].start and utils.my_routes[i].end == utils.shared_routes[j].end\
@@ -140,7 +133,7 @@ class Ui_MyRoutesWindow(QMainWindow):
 
             self.sharebtn.clicked.connect(MyRoutesWindow.close)
 
-            self.sharebtn.clicked.connect(lambda: self.share_route())
+            self.sharebtn.clicked.connect(self.share_route)
             self.sharebtn.clicked.connect(self.openMain)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 

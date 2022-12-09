@@ -87,7 +87,7 @@ class Ui_SharedRoutesWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
 
-        for i in range(len(utils.my_routes)):
+        for i in range(len(utils.shared_routes)):
             self.route_info = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
             self.route_info.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.route_info.setObjectName("route_info")

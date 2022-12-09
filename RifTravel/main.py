@@ -14,23 +14,6 @@ from unable_window import Ui_UnableWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-def parse_data():
-    route_data = []
-    with open("route_data.txt", "r") as file:
-        lines = file.readlines()
-        for line in lines:
-            route_data.append(line.strip())
-    temp = []
-    final = []
-    for data in route_data:
-        if data == "":
-            final.append(temp)
-            temp = []
-        else:
-            temp.append(data)
-    return final
-
-
 class Booking(ABC):
 
     @abstractmethod
@@ -125,16 +108,13 @@ class Route:
                           route.weather, datetime.date.today())
         import utils
         utils.my_routes.append(saved_route)
-        print("MY ROUTES", utils.my_routes)
 
         return saved_route
 
     def share_route(self, saved_route):
         utils.shared_routes.append(saved_route)
-        print("SHARED ROUTES", utils.shared_routes)
 
-    def create_route(self):
-        route_details = parse_data()
+    def create_route(self, route_details):
 
         if len(route_details) > 1:
 
@@ -146,7 +126,6 @@ class Route:
             end_location = route_details[3][1]
             date = route_details[4][0]
 
-            print(activities, severity, travelling_as, sleeping, start_location, end_location, date)
 
             if start_location == end_location:
                 print("Unable to create route")
@@ -161,8 +140,6 @@ class Route:
             else:
                 print("Route created")
                 try:
-                    # display Ui_RouteRecap window
-
                     self.window = QtWidgets.QMainWindow()
                     self.ui = Ui_RouteRecap()
                     self.ui.setupUi(self.window)
@@ -170,11 +147,7 @@ class Route:
                 except Exception as e:
                     print(e)
                 route = Route(start_location, end_location, random.randrange(10, 100), severity, activities, list(sleeping), None)
-                print("ROUTE CREATED", route.start, route.end, route.length, route.severity, route.activities,
-                      route.stops, route.weather)
                 saved_route = route.save_route(route)
-                print("SAVED ROUTE CREATED", saved_route.start, saved_route.end, saved_route.length, saved_route.severity,
-                        saved_route.activities, saved_route.stops, saved_route.weather, saved_route.date)
 
                 return saved_route
 
@@ -219,13 +192,9 @@ class User:
     def delete_account(self):
         pass
 
-# user = User("John John", "john@gmail.com", "123456", 20, 5, None)
-# user.create_route()
-
-
 
 class RouteAuthor(User):
-    def __init__(self, name: str, email: str, password: str, age: int, rating: int, friends, shared_route_counter: int):
+    def __init__(self, name: str, email: str, password: str, age: int, shared_route_counter: int):
         super().__init__(name, email, password, age)
         self.shared_route_coutner = shared_route_counter
 

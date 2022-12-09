@@ -14,53 +14,32 @@ import Route_confirmation
 from main_menu import Ui_MainWindow
 from Route_confirmation import Ui_RouteRecap
 
-from main import User
 import utils
 checkboxes = []
 
 
 class Ui_CreateRouteWindow(object):
     def back_btn(self):
-        # go back to main window
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
 
-    def show_dialog(self, info):
-        self.dialog = QtWidgets.QDialog()
-        self.ui = Ui_RouteRecap()
-        self.ui.setupUi(self.dialog, info)
-        self.dialog.show()
-
     def get_data(self):
         route_data = [self.checkbox_data(), self.slider_data(), self.radio_data(), self.combo_data(), self.date_data()]
-        print("ROUTE", route_data)
-        #create json file with route data
-
-        print(route_data)
-        with open("route_data.txt", "w") as f:
-            for item in route_data:
-                for i in item:
-                    f.write(str(i) + "\n")
-                f.write("\n")
         return route_data
 
     def checkbox_data(self):
         selected_activities = []
-        for i in range(len(checkboxes)):
-            print("checkboxes[i]: ", checkboxes[i].isChecked())
         for i in range(len(utils.activities)):
             if checkboxes[i].isChecked():
                 selected_activities.append(utils.activities[i])
         return selected_activities
 
-    #get data from slider
     def slider_data(self):
         severity = [self.severity_level.value()]
         return severity
 
-    #get data from radio buttons
     def radio_data(self):
         radio_data = ["Not stated", "Not stated"]
         if self.radioButton.isChecked():
@@ -73,14 +52,12 @@ class Ui_CreateRouteWindow(object):
             radio_data[1] = self.radioButton_4.text()
         return radio_data
 
-    #get data from combo boxes
     def combo_data(self):
         location = []
         location.append(self.start_location_combo.currentText())
         location.append(self.end_location_combo.currentText())
         return location
 
-    #get data from dateEdit
     def date_data(self):
         date = [self.dateEdit.text()]
         return date
@@ -134,14 +111,10 @@ class Ui_CreateRouteWindow(object):
         self.create_route_btn.setObjectName("create_routebtn")
 
         self.create_route_btn.clicked.connect(self.get_data)
-        # show dialog window on click and pass summary data
 
-        #self.create_route_btn.clicked.connect(lambda: self.show_dialog(self.get_data()))
         self.create_route_btn.clicked.connect(CreateRouteWindow.close)
 
-        self.create_route_btn.clicked.connect(utils.route.create_route)
-
-        #self.create_route_btn.clicked.connect(lambda: utils.user.create_group(self.get_data()))
+        self.create_route_btn.clicked.connect(lambda: utils.route.create_route(self.get_data()))
 
         self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_5.setGeometry(QtCore.QRect(390, 140, 151, 31))
