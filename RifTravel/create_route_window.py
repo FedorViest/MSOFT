@@ -217,7 +217,7 @@ class Ui_CreateRouteWindow(object):
     def activities_checkbox(self):
 
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(30, 290, 140, 100))
+        self.scrollArea.setGeometry(QtCore.QRect(30, 290, 200, 150))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

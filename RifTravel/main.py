@@ -116,40 +116,37 @@ class Route:
 
     def create_route(self, route_details):
 
-        if len(route_details) > 1:
+        activities = route_details[0]
+        severity = int(route_details[1][0])
+        travelling_as = route_details[2][0]
+        sleeping = [route_details[2][1]]
+        start_location = route_details[3][0]
+        end_location = route_details[3][1]
+        date = route_details[4][0]
 
-            activities = route_details[0]
-            severity = int(route_details[1][0])
-            travelling_as = route_details[2][0]
-            sleeping = [route_details[2][1]]
-            start_location = route_details[3][0]
-            end_location = route_details[3][1]
-            date = route_details[4][0]
+        if start_location == end_location or len(activities) >= 5:
+            print("Unable to create route")
+            try:
+                self.window = QtWidgets.QMainWindow()
+                self.ui = Ui_UnableWindow()
+                self.ui.setupUi(self.window)
+                self.window.show()
+            except Exception as e:
+                print(e)
 
+        else:
+            print("Route created")
+            try:
+                self.window = QtWidgets.QMainWindow()
+                self.ui = Ui_RouteRecap()
+                self.ui.setupUi(self.window)
+                self.window.show()
+            except Exception as e:
+                print(e)
+            route = Route(start_location, end_location, random.randrange(10, 100), severity, activities, list(sleeping), None)
+            saved_route = route.save_route(route)
 
-            if start_location == end_location:
-                print("Unable to create route")
-                try:
-                    self.window = QtWidgets.QMainWindow()
-                    self.ui = Ui_UnableWindow()
-                    self.ui.setupUi(self.window)
-                    self.window.show()
-                except Exception as e:
-                    print(e)
-
-            else:
-                print("Route created")
-                try:
-                    self.window = QtWidgets.QMainWindow()
-                    self.ui = Ui_RouteRecap()
-                    self.ui.setupUi(self.window)
-                    self.window.show()
-                except Exception as e:
-                    print(e)
-                route = Route(start_location, end_location, random.randrange(10, 100), severity, activities, list(sleeping), None)
-                saved_route = route.save_route(route)
-
-                return saved_route
+            return saved_route
 
         return None
 
@@ -203,8 +200,8 @@ class RouteAuthor(User):
 
 
 class Group:
-    def __init__(self, people_count: int, ability: str):
-        self.people_count = people_count
+    def __init__(self, member_count: int, ability: str):
+        self.people_count = member_count
         self.ability = ability
         self.created_at = datetime.datetime.now()
 
