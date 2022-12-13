@@ -1,5 +1,6 @@
 from Route_info import route_info
-from datetime import datetime
+import datetime
+
 
 class User:
     def __init__(self, name: str, email: str, password: str, age: int):
@@ -31,7 +32,8 @@ class RouteAuthor(User):
 
 
 class Group:
-    def __init__(self, member_count: int, ability: str):
+    def __init__(self, name: str, member_count: int, ability: str):
+        self.name = name
         self.people_count = member_count
         self.ability = ability
         self.created_at = datetime.datetime.now()

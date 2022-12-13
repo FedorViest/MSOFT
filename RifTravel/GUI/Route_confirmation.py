@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from main_menu import Ui_MainWindow
+from GUI.main_menu import Ui_MainWindow
 
 
 class Ui_RouteRecap(object):

@@ -16,7 +16,7 @@ import utils
 
 class Ui_MyRoutesWindow(QMainWindow):
 
-    def openMain(self):
+    """def openMain(self):
         try:
             from main_menu import Ui_MainWindow
             self.window = QtWidgets.QMainWindow()
@@ -24,7 +24,7 @@ class Ui_MyRoutesWindow(QMainWindow):
             self.ui.setupUi(self.window)
             self.window.show()
         except Exception as e:
-            print(e)
+            print(e)"""
 
     def share_route(self):
         sender = self.sender()
@@ -33,7 +33,7 @@ class Ui_MyRoutesWindow(QMainWindow):
 
     def back(self):
         try:
-            from main_menu import Ui_MainWindow
+            from GUI.main_menu import Ui_MainWindow
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_MainWindow()
             self.ui.setupUi(self.window)
@@ -124,19 +124,10 @@ class Ui_MyRoutesWindow(QMainWindow):
             self.verticalLayout.addWidget(self.sharebtn)
             self.verticalLayout.addWidget(self.delbtn)
 
-            for j in range(len(utils.shared_routes)):
-                if utils.my_routes[i].start == utils.shared_routes[j].start and utils.my_routes[i].end == utils.shared_routes[j].end\
-                        and utils.my_routes[i].activities == utils.shared_routes[j].activities and utils.my_routes[i].stops == utils.shared_routes[j].stops\
-                        and utils.my_routes[i].length == utils.shared_routes[j].length and utils.my_routes[i].severity == utils.shared_routes[j].severity:
-                    self.sharebtn.setEnabled(False)
-                    break
-
             self.sharebtn.clicked.connect(MyRoutesWindow.close)
 
             self.sharebtn.clicked.connect(self.share_route)
-            self.sharebtn.clicked.connect(self.openMain)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-
 
     def retranslateUi(self, MyRoutesWindow):
         _translate = QtCore.QCoreApplication.translate

@@ -10,9 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import Route_confirmation
-from main_menu import Ui_MainWindow
-from Route_confirmation import Ui_RouteRecap
+from GUI.main_menu import Ui_MainWindow
 
 import utils
 checkboxes = []

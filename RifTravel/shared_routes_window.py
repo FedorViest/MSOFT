@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import utils
-from main_menu import Ui_MainWindow
+from GUI.main_menu import Ui_MainWindow
 
 
 class Ui_SharedRoutesWindow(object):
@@ -92,12 +92,11 @@ class Ui_SharedRoutesWindow(object):
             self.route_info.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.route_info.setObjectName("route_info")
             self.verticalLayout.addWidget(self.route_info)
-            string = "ROUTE: " + str(i + 1) + "\nStart: " + utils.my_routes[i].start + "\t\tActivities: " + str(
-                utils.my_routes[i].activities) + \
-                     "\nEnd: " + utils.my_routes[i].end + "\t\tStops: " + str(utils.my_routes[i].stops) + \
-                     "\nLength: " + str(utils.my_routes[i].length) + "\t\tSeverity: " + str(utils.my_routes[i].severity) + \
-                     "\nDate created: " + str(utils.my_routes[i].date) + "\t\tWeather: " + \
-                     "sunny" if utils.my_routes[i].weather is None else "Sunny"
+            string = "ROUTE: " + str(i + 1) + "\t\tAuthor: " + str(utils.route_authors[i].name) + \
+                     "\nStart: " + utils.shared_routes[i].start + "\t\tActivities: " + str(utils.shared_routes[i].activities) + \
+                     "\nEnd: " + utils.shared_routes[i].end + "\t\tStops: " + str(utils.shared_routes[i].stops) + \
+                     "\nLength: " + str(utils.shared_routes[i].length) + "\t\tSeverity: " + str(utils.shared_routes[i].severity) + \
+                     "\nWeather: " + "sunny" if utils.shared_routes[i].weather is None else "Sunny"
             self.route_info.setText(string)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)

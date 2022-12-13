@@ -1,9 +1,12 @@
-from Route_confirmation import Ui_RouteRecap
-from unable_window import Ui_UnableWindow
+import User_info.user_info
+from GUI.Route_confirmation import Ui_RouteRecap
+from GUI.main_menu import Ui_MainWindow
+from GUI.share_unable_window import Ui_UnableShareWindow
+from GUI.unable_window import Ui_UnableWindow
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Functionalities.functionalities import Weather, Location, Rating, Invite
-from Stops.stops import Stop, Accomodation, Booking
+from PyQt5 import QtWidgets
+from Functionalities.functionalities import Weather
+from Stops.stops import Booking
 import datetime
 import random
 import utils
@@ -44,7 +47,30 @@ class Route:
         return saved_route
 
     def share_route(self, saved_route):
+        for shared_route in utils.shared_routes:
+            if shared_route.start == saved_route.start and shared_route.end == saved_route.end and \
+                    shared_route.activities == saved_route.activities:
+                print("Unable to share selected route")
+                try:
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Ui_UnableShareWindow()
+                    self.ui.setupUi(self.window)
+                    self.window.show()
+                except Exception as e:
+                    print(e)
+                return None
+        try:
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_MainWindow()
+            self.ui.setupUi(self.window)
+            self.window.show()
+        except Exception as e:
+            print(e)
+        route_author = User_info.user_info.RouteAuthor(utils.curr_user.name, utils.curr_user.email,
+                                                       utils.curr_user.password, utils.curr_user.age, 1)
+        utils.route_authors.append(route_author)
         utils.shared_routes.append(saved_route)
+        return saved_route
 
     def create_route(self, route_details):
 
