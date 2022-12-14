@@ -38,6 +38,12 @@ class Route:
         self.stops = stops
         self.weather = weather
 
+    # Designated method for saving route into list of my_routes in utils.py. This method is called in create_route method
+    # in class Route. It creates and returns the saved route.
+    # @param route: Route object - created in create_route method
+    # @return: SavedRoute object - saved route
+    # This method is used in UC01 - Vytvor trasu
+
     def save_route(self, route):
         saved_route = SavedRoute(route.start, route.end, route.length, route.severity, route.activities, route.stops,
                           route.weather, datetime.date.today())
@@ -45,6 +51,14 @@ class Route:
         utils.my_routes.append(saved_route)
 
         return saved_route
+
+    # Method for sharing selected route. When user selects a route to share, this method is called. It checks if the
+    # route is already shared and if not, it adds it to the list of shared routes and returns the route. If the route
+    # is already shared a new window is opened and the user is informed that the route cannot be shared.
+    # It also creates RouteAuthor object and adds it to the list of route authors.
+    # @param saved_route: SavedRoute object - selected route to share
+    # @return: SavedRoute object - shared route
+    # This method is used in UC03 - Zdielaj trasu
 
     def share_route(self, saved_route):
         for shared_route in utils.shared_routes:
@@ -71,6 +85,15 @@ class Route:
         utils.route_authors.append(route_author)
         utils.shared_routes.append(saved_route)
         return saved_route
+
+    # Method for creating route. It creates a route object and returns it. It also calls save_route method to save the
+    # route into the list of my_routes in utils.py. It checks whether start and end locations are equal and if amount of
+    # activities is greater than 5. If yes, it opens a new window and informs the user that the route cannot be created.
+    # Otherwise new route is created and save_route method is called.
+    # @param route_details: list - information sent from GUI which is then parsed into variables
+    # @return: SavedRoute object - created route is saved
+
+    # This method is used in UC01 - Vytvor trasu
 
     def create_route(self, route_details):
 

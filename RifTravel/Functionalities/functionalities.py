@@ -34,8 +34,8 @@ class Rating:
     def edit_rating(self):
         return Rating
 
+
 class Invite:
-    #from User_info.user_info import User
     def __init__(self, date: datetime, state: str, sender: str, receiver: str):
         self.date = date
         self.state = state
@@ -43,19 +43,13 @@ class Invite:
         self.receiver = receiver
 
     def accept(self):
-        self.state = 'accepted'
+        pass
 
     def reject(self):
-        self.state = 'rejected'
+        pass
 
     def create_invite(self, sender: str, receiver: str):
-        self.sender = sender
-        self.receiver = receiver
-        self.date = datetime.datetime.now()
-        self.state = 'pending'
+        pass
 
     def delete_invite(self):
-        self.sender = None
-        self.receiver = None
-        self.date = None
-        self.state = None
+        pass

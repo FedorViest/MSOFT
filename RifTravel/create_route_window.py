@@ -15,17 +15,28 @@ from GUI.main_menu import Ui_MainWindow
 import utils
 checkboxes = []
 
+# class for displaying window for creating route
+
 
 class Ui_CreateRouteWindow(object):
+
+    # function for when "Back" button is clicked - returns to main menu
     def back_btn(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
 
+    # function for getting user inputted data and storing it in a list
+    # Every function for getting data from a specific input type is called here
+    # @return: list of user inputted data
+
     def get_data(self):
         route_data = [self.checkbox_data(), self.slider_data(), self.radio_data(), self.combo_data(), self.date_data()]
         return route_data
+
+    # function for getting data from checkboxes representing activities
+    # @return: list of selected activities
 
     def checkbox_data(self):
         selected_activities = []
@@ -34,9 +45,16 @@ class Ui_CreateRouteWindow(object):
                 selected_activities.append(utils.activities[i])
         return selected_activities
 
+    # function for getting data from slider representing severity level
+    # @return: list of selected severity level
+
     def slider_data(self):
         severity = [self.severity_level.value()]
         return severity
+
+    # function for getting data from radio buttons representing whether user is travelling alone or in a group and
+    # sleeping in camp / hotel / None
+    # @return: list of selected options - default is "Not stated"
 
     def radio_data(self):
         radio_data = ["Not stated", "Not stated"]
@@ -50,11 +68,17 @@ class Ui_CreateRouteWindow(object):
             radio_data[1] = self.radioButton_4.text()
         return radio_data
 
+    # function for getting data from comboboxes representing start and end locations
+    # @return: list of start and end locations
+
     def combo_data(self):
         location = []
         location.append(self.start_location_combo.currentText())
         location.append(self.end_location_combo.currentText())
         return location
+
+    # function for getting data from dateEdit representing route start date
+    # @return: start date stored in a list
 
     def date_data(self):
         date = [self.dateEdit.text()]
@@ -111,6 +135,8 @@ class Ui_CreateRouteWindow(object):
         self.create_route_btn.clicked.connect(self.get_data)
 
         self.create_route_btn.clicked.connect(CreateRouteWindow.close)
+
+        # calling function Route.create_route() to create route with user inputted data on button click
 
         self.create_route_btn.clicked.connect(lambda: utils.route.create_route(self.get_data()))
 
@@ -212,6 +238,10 @@ class Ui_CreateRouteWindow(object):
         self.retranslateUi(CreateRouteWindow)
         QtCore.QMetaObject.connectSlotsByName(CreateRouteWindow)
 
+    # function for creating checkboxes including predefined activities. Function stores all created checkboxes in a list
+    # of checkboxes and stores them in scroll area on the window. In a for loop, 1 checkbox is created for each activity
+    # in the list of activities from utils.py
+
     def activities_checkbox(self):
 
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
@@ -241,6 +271,9 @@ class Ui_CreateRouteWindow(object):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
+    # function for creating comboboxes including predefined start locations, which are stored in list of start locations
+    # in utils.py.
+
     def combobox_start(self):
         self.start_location_combo = QtWidgets.QComboBox(self.centralwidget)
         self.start_location_combo.setGeometry(QtCore.QRect(190, 140, 151, 31))
@@ -248,6 +281,9 @@ class Ui_CreateRouteWindow(object):
         self.start_location_combo.setObjectName("start_location_combo")
 
         self.start_location_combo.addItems(utils.start_location_list)
+
+    # function for creating comboboxes including predefined end locations, which are stored in list of end locations
+    # in utils.py.
 
     def combobox_end(self):
         self.end_location_combo = QtWidgets.QComboBox(self.centralwidget)

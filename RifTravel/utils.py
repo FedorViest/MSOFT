@@ -1,6 +1,7 @@
+# This file acts as a "database" for the application. All instances of classes are stored here and all required
+# information needed to create routes is stored here.
+
 import datetime
-# from main import User, Route, SavedRoute, Stop, Accomodation, Activity, Weather, Rating
-#from Route_info.route_info import Route, SavedRoute
 import Route_info
 import User_info
 from User_info import user_info
