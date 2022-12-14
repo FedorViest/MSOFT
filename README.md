@@ -1,1 +1,0 @@
-# Tak som došiel
